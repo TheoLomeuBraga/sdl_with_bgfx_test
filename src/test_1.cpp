@@ -1,7 +1,6 @@
 #include <cstdio>
 
 #include "bgfx/bgfx.h"
-#include <bgfx/platform.h>
 
 #define SDL_MAIN_USE_CALLBACKS
 #include <SDL3/SDL.h>
@@ -74,7 +73,7 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
 
   bgfx::touch(0);
   bgfx::dbgTextClear();
-  bgfx::dbgTextPrintf(0, 1, 0x4f, "Renderer: %s\n", bgfx::getRendererName(bgfx::getCaps()->rendererType));
+  bgfx::dbgTextPrintf(0, 1, 0x4f, "Renderer: %s", bgfx::getRendererName(bgfx::getCaps()->rendererType));
   bgfx::frame();
   return SDL_APP_CONTINUE;
 }
