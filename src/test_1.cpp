@@ -11,7 +11,7 @@ SDL_Window *window;
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
   SDL_Init(SDL_INIT_VIDEO);
 
-  window = SDL_CreateWindow("SDL3 with BGFX",640,480,SDL_WINDOW_RESIZABLE);
+  window = SDL_CreateWindow("SDL3 with BGFX", 640, 480, SDL_WINDOW_RESIZABLE);
 
   if (window == NULL) {
     // In the case that the window could not be made...
@@ -49,6 +49,10 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
   pd.nwh =
       SDL_GetPointerProperty(props, SDL_PROP_WINDOW_WIN32_HWND_POINTER, NULL);
 
+#elif defined(SDL_PLATFORM_EMSCRIPTEN)
+
+  pd.nwh = (void*)"#canvas";
+
 #endif
 
   init.platformData = pd;
@@ -56,8 +60,6 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
   init.resolution.width = 640;
   init.resolution.height = 480;
   bgfx::init(init);
-
-
 
   bgfx::reset(640, 480, BGFX_RESET_VSYNC);
 
@@ -73,7 +75,8 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
 
   bgfx::touch(0);
   bgfx::dbgTextClear();
-  bgfx::dbgTextPrintf(0, 1, 0x4f, "Renderer: %s", bgfx::getRendererName(bgfx::getCaps()->rendererType));
+  bgfx::dbgTextPrintf(0, 1, 0x4f, "Renderer: %s",
+                      bgfx::getRendererName(bgfx::getCaps()->rendererType));
   bgfx::frame();
   return SDL_APP_CONTINUE;
 }

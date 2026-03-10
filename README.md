@@ -5,3 +5,8 @@
   cd build
   make
 ```
+
+# Tested On
+    * Windows
+    * Linux
+    * Web
