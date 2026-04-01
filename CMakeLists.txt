@@ -10,10 +10,10 @@ set(BGFX_BUILD_TOOLS OFF CACHE BOOL "" FORCE)
 set(BGFX_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(BGFX_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 
-ADD_SUBDIRECTORY(lib/SDL)
-ADD_SUBDIRECTORY(lib/bgfx)
+add_subdirectory(lib/SDL)
+add_subdirectory(lib/bgfx)
 
-INCLUDE_DIRECTORIES(lib/SDL/include)
+include_directories(lib/SDL/include)
 
 add_executable(test_1 src/test_1.cpp)
 target_link_libraries(test_1 PRIVATE SDL3::SDL3-static bgfx)
